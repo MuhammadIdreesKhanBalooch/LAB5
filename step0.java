@@ -46,7 +46,7 @@ public class step0 {
 		Thread.sleep(1000);
 //STEP(2)
 		// getting the table
-		WebElement table = driver.findElement(By.id("table1"));
+		WebElement table = driver.findElement(By.xpath("//div[contains(@class,'widget HTML')]//descendant :: table"));
 		List<WebElement> allRows = driver.findElements(By.tagName("tr"));
 		for (WebElement row : allRows) {
 			// List <WebElement> header = driver.findElements(By.tagName("th"));
@@ -182,7 +182,10 @@ public class step0 {
 		System.out.println(para1.getText() + "\n" + para2.getText());
 		// driver.close();
 		driver.switchTo().window(parentWindowHandler);
-
+//uploading a file
+		WebElement fileUpload = driver.findElement(By.xpath("(//div[contains(@class,'widget HTML')]//descendant :: input)[10]"));
+		//fileUpload.click();
+		fileUpload.sendKeys("C:\\Users\\khan\\Desktop\\docs\\matric degree.jpg");
 		// my btn functionality before clicking "try it"
 		WebElement myBtn = driver
 				.findElement(By.xpath("(//div[contains(@class,'widget-content')]//descendant :: button)[7]"));
