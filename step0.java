@@ -40,8 +40,6 @@ public class step0 {
 		textArea2.sendKeys(Keys.CONTROL + "a");
 		Thread.sleep(1000);
 
-		// WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-
 		textArea2.sendKeys(Keys.BACK_SPACE);
 		Thread.sleep(1000);
 		textArea2.sendKeys("A supreme lover of plants  is automating the browser!");
@@ -72,19 +70,23 @@ public class step0 {
 
 //Step (3): 		
 
-		// switchingToFrames xxxxxxxxxxxxxxxxx
+		// switchingToFrames
+		//frame1
 		Thread.sleep(2000);
 		WebElement frame1 = driver
 				.findElement(By.xpath("(//div[contains(@class,'widget-content')]//descendant :: iframe)[1]"));
 		driver.switchTo().frame(frame1);
+		//switch to default frame
 		driver.switchTo().defaultContent();
 //		actions.moveToElement(frame1, 30, 30).perform();
 //		actions.moveToElement(frame1).build().perform();
 		Thread.sleep(2000);
+		//frame2
 		WebElement frame2 = driver
 				.findElement(By.xpath("(//div[contains(@class,'widget-content')]//descendant :: iframe)[2]"));
 		driver.switchTo().frame(frame2);
 		// actions.moveToElement(frame2).build().perform();
+		//back to default frame
 		driver.switchTo().defaultContent();
 
 		// 2nd login
@@ -133,13 +135,14 @@ public class step0 {
 		WebElement btn2 = driver
 				.findElement(By.xpath("(//div[contains(@class,'sidebar section')]//descendant :: button)[1]"));
 		btn2.click();
+		//checking enability
 		System.out.println("button 2 is" + btn2.isEnabled());
 		Thread.sleep(1000);
 		// JavascriptExecutor scroll = (JavascriptExecutor) driver;
 		// scroll.executeScript("window.ScrollBy(0,500)","");
 		actions.sendKeys(Keys.PAGE_DOWN).build().perform();
 		actions.sendKeys(Keys.PAGE_DOWN).build().perform();
-		// submit + login + register
+		//clicking submit + login + register
 		driver.findElement(By.xpath("(//div[contains(@class,'sidebar section')]//descendant :: button)[3]")).click();
 		Thread.sleep(1000);
 		driver.findElement(By.xpath("(//div[contains(@class,'sidebar section')]//descendant :: button)[4]")).click();
@@ -170,6 +173,7 @@ public class step0 {
 
 		driver.switchTo().window(subWindowHandler);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("para1")));
+	//getting text from new popup window
 		WebElement para1 = driver.findElement(By.id("para1"));
 
 		WebElement para2 = driver.findElement(By.id("para2"));
@@ -179,13 +183,14 @@ public class step0 {
 		// driver.close();
 		driver.switchTo().window(parentWindowHandler);
 
-		// my btn functionality
+		// my btn functionality before clicking "try it"
 		WebElement myBtn = driver
 				.findElement(By.xpath("(//div[contains(@class,'widget-content')]//descendant :: button)[7]"));
 		System.out.println("'My Button' functionality before clicking 'Try It' button" + myBtn.isEnabled());
 		// tryIt button
 		driver.findElement(By.xpath("(//div[contains(@class,'sidebar section')]//descendant :: button)[7]")).click();
 		Thread.sleep(4000);
+		// my btn functionality after clicking "try it"
 		System.out.println("'My Button' functionality after clicking 'Try It' button" + myBtn.isEnabled());
 		// chekThis buton
 		driver.findElement(By.xpath("(//div[contains(@class,'sidebar section')]//descendant :: button)[11]")).click();
@@ -203,8 +208,10 @@ public class step0 {
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("(//div[contains(@class,'widget HTML')]//descendant :: input)[13]")).click();
 		Thread.sleep(2000);
+		//getting alert
 		driver.findElement(By.xpath("(//div[contains(@class,'widget HTML')]//descendant :: input)[15]")).click();
 		Thread.sleep(1000);
+		//accepting alert
 		driver.switchTo().alert().accept();
 		// colors
 		Thread.sleep(1000);
@@ -218,7 +225,7 @@ public class step0 {
 		actions.doubleClick(readOnlyTextBox).perform();
 		Thread.sleep(2000);
 
-		// get Prompt for name xxxxxxxxxxxxxxxxxxxxxxxxxx
+		// get Prompt for name 
 
 		WebElement getPrompt = driver
 				.findElement(By.xpath("(//div[contains(@class,'widget HTML')]//descendant :: input)[19]"));
@@ -226,6 +233,7 @@ public class step0 {
 		Alert promptPresent = wait.until(ExpectedConditions.alertIsPresent());
 		System.out.println(promptPresent.getText());
 		Thread.sleep(3000);
+		//put name in alert
 		String name = "Muhammad Idrees";
 		driver.switchTo().alert().sendKeys(name);
 		promptPresent.accept();
