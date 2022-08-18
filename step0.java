@@ -1,3 +1,5 @@
+// C:\\Users\\khan\\chrome driver\\chromedriver.exe
+
 import java.time.Duration;
 import java.util.Iterator;
 import java.util.List;
@@ -20,7 +22,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class step0 {
 	public static void main(String[] args) throws InterruptedException {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\4073\\Desktop\\chromedr\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\khan\\chrome driver\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 
@@ -28,44 +30,44 @@ public class step0 {
 		driver.get("https://omayo.blogspot.in/");
 //STEP(1)	
 		// text field 1
-		driver.findElement(By.xpath("(//div[starts-with(@class,'columns-inner')]//child :: textarea)[1]"))
+		driver.findElement(By.xpath("//div[contains(@class,'navbar')]//following :: textarea[contains(@id,'ta')]"))
 				.sendKeys("Muhammad Idrees Balooch");
 
 		// text field 2
 		Actions actions = new Actions(driver);
 		actions.sendKeys(Keys.PAGE_DOWN).build().perform();
+		
 		WebElement textArea2 = driver
-				.findElement(By.xpath("(//div[starts-with(@class,'columns-inner')]//child :: textarea)[2]"));
-		Thread.sleep(1);
+				.findElement(By.xpath("//div[contains(@class,'navbar')]//following :: textarea[contains(text(),'The ')]"));
+		
 		textArea2.sendKeys(Keys.CONTROL + "a");
-		Thread.sleep(1000);
 
 		textArea2.sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(1000);
+		
 		textArea2.sendKeys("A supreme lover of plants  is automating the browser!");
-		Thread.sleep(1000);
+		
 //STEP(2)
 		// getting the table
-		WebElement table = driver.findElement(By.xpath("//div[contains(@class,'widget HTML')]//descendant :: table"));
+		WebElement table = driver.findElement(By.xpath("//div[contains(@class,'navbar')]//following :: table[contains(@id,'table')]"));
 		List<WebElement> allRows = driver.findElements(By.tagName("tr"));
 		for (WebElement row : allRows) {
-			// List <WebElement> header = driver.findElements(By.tagName("th"));
+
 			System.out.print(row.getText() + '\n');
 
 		}
 
 //	//first login
-
-		driver.findElement(By.xpath("(//div[contains(@class,'widget-content')]//descendant :: input )[1]"))
+		//name
+		driver.findElement(By.xpath("// form[contains(@name,'form')]//child::input[contains(@type,'text')]"))
 				.sendKeys("Muhammad Iddrees");
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("(//div[contains(@class,'widget-content')]//descendant :: input )[2]"))
+		//password
+		driver.findElement(By.xpath("// form[contains(@name,'form')]//child::input[contains(@type,'password')]"))
 				.sendKeys("8932");
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("(//div[contains(@class,'widget-content')]//descendant :: button )[1]")).click();
-		Thread.sleep(1000);
+		//submit
+		driver.findElement(By.xpath("// form[contains(@name,'form')]//child::button[contains(@type,'button')]")).click();
+		//scroll down
 		actions.sendKeys(Keys.PAGE_DOWN).build().perform();
-		Thread.sleep(1000);
+		
 		actions.sendKeys(Keys.PAGE_DOWN).build().perform();
 
 //Step (3): 		
@@ -78,89 +80,63 @@ public class step0 {
 		driver.switchTo().frame(frame1);
 		//switch to default frame
 		driver.switchTo().defaultContent();
-//		actions.moveToElement(frame1, 30, 30).perform();
-//		actions.moveToElement(frame1).build().perform();
-		Thread.sleep(2000);
+
 		//frame2
 		WebElement frame2 = driver
 				.findElement(By.xpath("(//div[contains(@class,'widget-content')]//descendant :: iframe)[2]"));
 		driver.switchTo().frame(frame2);
-		// actions.moveToElement(frame2).build().perform();
 		//back to default frame
 		driver.switchTo().defaultContent();
 
 		// 2nd login
-		driver.findElement(By.xpath("(//form[contains(@name,'login')]//descendant :: input )[1]"))
-				.sendKeys("Muhammad Iddrees");
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("(//form[contains(@name,'login')]//descendant :: input )[2]")).sendKeys("8932");
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("(//form[contains(@name,'login')]//descendant :: input )[3]")).click();
-		Thread.sleep(1000);
+		driver.findElement(By.xpath("// form[contains(@name,'login')]//child::input[contains(@type,'text')]")).sendKeys("Muhammad Iddrees");
+		driver.findElement(By.xpath("// form[contains(@name,'login')]//child::input[contains(@type,'password')]")).sendKeys("8932");
+		driver.findElement(By.xpath("// form[contains(@name,'login')]//child::input[contains(@type,'button')]")).click();
 		driver.switchTo().alert().accept();
 
 //Step (4):
 		actions.sendKeys(Keys.PAGE_UP).build().perform();
 		actions.sendKeys(Keys.PAGE_UP).build().perform();
-		actions.sendKeys(Keys.PAGE_UP).build().perform();
-		Thread.sleep(1000);
-		// select hyundai
-		driver.findElement(By.xpath("(//div[contains(@class,'column-left-outer')]//descendant :: option)[3]")).click();
-		Thread.sleep(2000);
-		// select doc3
+	// select hyundai
+		driver.findElement(By.xpath("//div[contains(@class,'widget HTML')]//child :: option[contains(text(),'Hyundai')]")).click();
+	// select doc3
+		//dropdown
 		WebElement dropdown = driver
-				.findElement(By.xpath("(//div[contains(@class,'widget HTML')]//descendant :: select)[2]"));
+				.findElement(By.xpath("//div[contains(@class,'widget HTML')]//child :: select[contains(@class,'combo')]"));
 		dropdown.click();
-		Thread.sleep(1000);
+	//doc3	
 		WebElement doc3 = driver
-				.findElement(By.xpath("(//div[contains(@class,'widget-content')]//descendant :: option)[8]"));
+				.findElement(By.xpath("//select[contains(@class,'combo')]//child :: option[contains(@value,'jkl')]"));
 		doc3.click();
-		// actions.moveToElement(doc3);
-//		actions.click().build().perform();
-		// doc3.click();
-		Thread.sleep(1000);
 
-		// preloaded textbox
+	// preloaded textbox
 
-		driver.findElement(By.xpath("(//div[contains(@class,'column-left-outer')]//descendant :: option)[8]")).click();
+		driver.findElement(By.xpath("//div[contains(@class,'widget-content')]//child :: input[contains(@value,'Selenium')]")).click();
 		WebElement preLoadedText = driver
 				.findElement(By.xpath("(//div[contains(@class,'sidebar section')]//descendant :: input)[1]"));
 		preLoadedText.sendKeys(Keys.CONTROL + "a");
-		Thread.sleep(2000);
 		preLoadedText.sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(1000);
 		preLoadedText.sendKeys("hello world");
-		Thread.sleep(1000);
-		// enabled button
-		WebElement btn2 = driver
-				.findElement(By.xpath("(//div[contains(@class,'sidebar section')]//descendant :: button)[1]"));
+	// enabled button
+		WebElement btn2 = driver.findElement(By.xpath("//div[contains(@class,'widget-content')]//child :: button[contains(text(),'Button2')]"));
 		btn2.click();
-		//checking enability
+	//checking enability
 		System.out.println("button 2 is" + btn2.isEnabled());
-		Thread.sleep(1000);
-		// JavascriptExecutor scroll = (JavascriptExecutor) driver;
-		// scroll.executeScript("window.ScrollBy(0,500)","");
+
 		actions.sendKeys(Keys.PAGE_DOWN).build().perform();
-		actions.sendKeys(Keys.PAGE_DOWN).build().perform();
-		//clicking submit + login + register
-		driver.findElement(By.xpath("(//div[contains(@class,'sidebar section')]//descendant :: button)[3]")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("(//div[contains(@class,'sidebar section')]//descendant :: button)[4]")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("(//div[contains(@class,'sidebar section')]//descendant :: button)[5]")).click();
-		Thread.sleep(1000);
-		// clickAfterTextDisapear button
+	//clicking submit + login + register
+		driver.findElement(By.xpath("//div[contains(@class,'widget-content')]//child :: button[contains(text(),'Submit')]")).click();
+		driver.findElement(By.xpath("//div[contains(@class,'widget-content')]//child :: button[contains(text(),'Login')]")).click();
+		driver.findElement(By.xpath("//div[contains(@class,'widget-content')]//child :: button[contains(text(),'Register')]")).click();
+	// clickAfterTextDisapear button
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@id,'delete')]")));
-
-		// Thread.sleep(1000);
-		driver.findElement(By.xpath("(//div[contains(@class,'sidebar section')]//descendant :: input)[3]")).click();
-		Thread.sleep(1000);
+	//alert	
+		driver.findElement(By.xpath("//div[contains(@class,'widget-content')]//child :: input[contains(@value,'ClickAfter')]")).click();
 		driver.switchTo().alert().accept();
 //New Window		
-		driver.findElement(By.xpath("(//div[contains(@class,'sidebar section')]//descendant :: a)[4]")).click();
-		// gets parent/current window name
-		Thread.sleep(10000);
+		driver.findElement(By.xpath("//div[contains(@class,'widget-content')]//child :: a[contains(text(),'Open')]")).click();
+	// gets parent/current window name
 		String parentWindowHandler = driver.getWindowHandle();
 		String subWindowHandler = null;
 
@@ -172,115 +148,95 @@ public class step0 {
 		}
 
 		driver.switchTo().window(subWindowHandler);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("para1")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("main")));
 	//getting text from new popup window
-		WebElement para1 = driver.findElement(By.id("para1"));
+		WebElement para1 = driver.findElement(By.className("main"));
 
-		WebElement para2 = driver.findElement(By.id("para2"));
-//        para1.sendKeys(Keys.CONTROL + "a" );
-//        para2.sendKeys(Keys.CONTROL + "a" );
+		WebElement para2 = driver.findElement(By.className("sub"));
 		System.out.println(para1.getText() + "\n" + para2.getText());
-		// driver.close();
 		driver.switchTo().window(parentWindowHandler);
-//uploading a file
-		WebElement fileUpload = driver.findElement(By.xpath("(//div[contains(@class,'widget HTML')]//descendant :: input)[10]"));
-		//fileUpload.click();
+		
+	//uploading a file
+		WebElement fileUpload = driver.findElement(By.xpath("//form[contains(@action,'demo_form')]//child :: input"));
+	//fileUpload.click();
 		fileUpload.sendKeys("C:\\Users\\khan\\Desktop\\docs\\matric degree.jpg");
-		// my btn functionality before clicking "try it"
+
+	// my btn functionality before clicking "try it"
 		WebElement myBtn = driver
-				.findElement(By.xpath("(//div[contains(@class,'widget-content')]//descendant :: button)[7]"));
+				.findElement(By.xpath("//button[contains(text(),'My')]"));
 		System.out.println("'My Button' functionality before clicking 'Try It' button" + myBtn.isEnabled());
 		// tryIt button
-		driver.findElement(By.xpath("(//div[contains(@class,'sidebar section')]//descendant :: button)[7]")).click();
+		driver.findElement(By.xpath("//button[contains(text(),'Try')]")).click();
 		Thread.sleep(4000);
 		// my btn functionality after clicking "try it"
 		System.out.println("'My Button' functionality after clicking 'Try It' button" + myBtn.isEnabled());
 		// chekThis buton
-		driver.findElement(By.xpath("(//div[contains(@class,'sidebar section')]//descendant :: button)[11]")).click();
+		driver.findElement(By.xpath("//button[contains(text(),'Check')]")).click();
 		// checkbox wait
 		wait.until(ExpectedConditions
-				.elementToBeClickable(By.xpath("(//div[contains(@class,'sidebar section')]//descendant :: input)[6]")));
+				.elementToBeClickable(By.xpath("//input[contains(@id,'dt') ]")));
 		// checkbox click
-		driver.findElement(By.xpath("(//div[contains(@class,'sidebar section')]//descendant :: input)[6]")).click();
-		Thread.sleep(2000);
+		driver.findElement(By.xpath("//input[contains(@id,'dt') ]")).click();
 
 //Step (5):
-		// gender
+		
 		actions.sendKeys(Keys.PAGE_UP).build().perform();
 		actions.sendKeys(Keys.PAGE_UP).build().perform();
-		Thread.sleep(2000);
+	// gender
 		driver.findElement(By.xpath("(//div[contains(@class,'widget HTML')]//descendant :: input)[13]")).click();
 		Thread.sleep(2000);
-		//getting alert
-		driver.findElement(By.xpath("(//div[contains(@class,'widget HTML')]//descendant :: input)[15]")).click();
-		Thread.sleep(1000);
-		//accepting alert
+	//getting alert
+		driver.findElement(By.xpath("//input[contains(@value,'ClickTo')]")).click();
+	//accepting alert
 		driver.switchTo().alert().accept();
-		// colors
-		Thread.sleep(1000);
-
-		driver.findElement(By.xpath("(//div[contains(@class,'widget HTML')]//descendant :: input)[17]")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("(//div[contains(@class,'widget HTML')]//descendant :: input)[16]")).click();
-		Thread.sleep(1000);
+	// blue color
+		driver.findElement(By.xpath("//input[contains(@value,'blue')]")).click();
+	//	orange color
+		driver.findElement(By.xpath("//input[contains(@value,'ora')]")).click();
+	//readonly textbox	
 		WebElement readOnlyTextBox = driver
-				.findElement(By.xpath("(//div[contains(@class,'widget HTML')]//descendant :: input)[18]"));
+				.findElement(By.xpath("//input[contains(@value,'Read')]"));
 		actions.doubleClick(readOnlyTextBox).perform();
-		Thread.sleep(2000);
 
 		// get Prompt for name 
 
 		WebElement getPrompt = driver
-				.findElement(By.xpath("(//div[contains(@class,'widget HTML')]//descendant :: input)[19]"));
+				.findElement(By.xpath("//input[contains(@value,'GetPrompt')]"));
 		getPrompt.click();
 		Alert promptPresent = wait.until(ExpectedConditions.alertIsPresent());
 		System.out.println(promptPresent.getText());
-		Thread.sleep(3000);
-		//put name in alert
+	//put name in alert
 		String name = "Muhammad Idrees";
 		driver.switchTo().alert().sendKeys(name);
 		promptPresent.accept();
 
-//		promptPresent.sendKeys(name);
-//		driver.switchTo().alert().sendKeys("midres");
-//		Thread.sleep(2000);
-		// myNameAlert.accept();
-
-		// Alert getPromptAlert = driver.switchTo().alert();
-//		System.out.print(getPromptAlert.getText());
-//		getPromptAlert.sendKeys("Muhammad Idrees Balooch");
-//		Thread.sleep(2000);
-//		getPromptAlert.accept();
-
-		Thread.sleep(1000);
-
-		// filling text boxes and selecting car
+	// filling text boxes and selecting car
+		//1st textbox
 		WebElement locateUsingClass1 = driver
 				.findElement(By.xpath("(//div[contains(@class,'widget-content') ]//descendant :: input)[26]"));
 		locateUsingClass1.click();
 		locateUsingClass1.sendKeys("located finally");
-		Thread.sleep(1000);
+		//2nd texbox
 		WebElement locateUsingClass2 = driver
 				.findElement(By.xpath("(//div[contains(@class,'widget-content') ]//descendant :: input)[27]"));
 		locateUsingClass2.click();
 		locateUsingClass2.sendKeys("hope done the question");
 		actions.sendKeys(Keys.PAGE_DOWN).build().perform();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("(//div[contains(@class,'widget-content') ]//descendant :: input)[30]")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("(//div[contains(@class,'widget-content') ]//descendant :: input)[34]")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("(//div[contains(@class,'widget-content') ]//descendant :: input)[32]")).click();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("(//div[contains(@class,'widget-content') ]//descendant :: input)[32]")).click();
-		Thread.sleep(1000);
-		// clicking the dropdown
-		driver.findElement(By.xpath("(//div[contains(@class,'widget-content') ]//descendant :: button)[13]")).click();
-		// Thread.sleep(1000);
+	//car	
+		driver.findElement(By.xpath("//input[contains(@value,'Car')]")).click();
+	//bag	
+		driver.findElement(By.xpath("//input[contains(@value,'Bag')]")).click();
+	//book select	
+		driver.findElement(By.xpath("//input[contains(@value,'Book')]")).click();
+	// book deselect	
+		driver.findElement(By.xpath("//input[contains(@value,'Book')]")).click();
+	// clicking the dropdown
+		driver.findElement(By.xpath("//button[contains(@class,'drop')]")).click();
+	//wait for dropdown to open	
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath("(//div[contains(@class,'widget-content') ]//descendant :: a)[20]")));
-		// moving to facebook
-		driver.findElement(By.xpath("(//div[contains(@class,'widget-content') ]//descendant :: a)[20]")).click();
+				By.xpath("//a[contains(text(),'Facebook')]")));
+	// moving to facebook
+		driver.findElement(By.xpath("//a[contains(text(),'Facebook')]")).click();
 
 	}
 
